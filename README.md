@@ -1,4 +1,5 @@
 # HAWK Unitree A1
+<p align="center"><img src="img/HAWK_I/.png" width="70%" /><br><br></p>
 
 #### Connecting to the internet
 
@@ -24,3 +25,11 @@
 - Type **roslaunch realsense2_camera rs_capture** into the terminal to stream all camera sensors and publish on the appropriate ROS topics.
 - These streams can then be accessed and visualised through Rviz.
 - Refer to the realsense2_camera readme for a detailed guide on the usage of the ROS Wrapper.
+
+#### Using the Unitree_legged_sdk
+
+-
+
+#### Using the RobotSLAMSystem
+
+-
