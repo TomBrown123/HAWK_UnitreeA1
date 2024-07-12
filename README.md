@@ -1,5 +1,7 @@
-# HAWK Unitree A1
-<p align="center"><img src="img/HAWK_I/.png" width="70%" /><br><br></p>
+<p align="center"><img src="img/HAWK_I.png" width="25%" /></p>
+<p align="center"> <font-size: 24px;"><strong>Unitree A1</strong></p>
+
+
 
 #### Connecting to the internet
 
@@ -23,7 +25,7 @@
 
 - The ros-wrapper is located in **/home/unitree/catkin_ws/src/realsense/realsense2_camera** and also contains many example roslaunch files.
 - Type **roslaunch realsense2_camera rs_capture** into the terminal to stream all camera sensors and publish on the appropriate ROS topics.
-- These streams can then be accessed and visualised through Rviz.
+- These streams can then be visualised through Rviz.
 - Refer to the realsense2_camera readme for a detailed guide on the usage of the ROS Wrapper.
 
 #### Using the Unitree_legged_sdk
@@ -31,5 +33,17 @@
 -
 
 #### Using the RobotSLAMSystem
+
+-
+
+#### Using the Gesture Recognition demo
+
+-
+
+#### Using the Unitree_ros_to_real package
+
+-
+
+#### Using the rbd_packages
 
 -
