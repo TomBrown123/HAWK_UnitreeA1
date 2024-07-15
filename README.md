@@ -14,20 +14,12 @@
 - In order to restore the connection between all the components again, undo the changes to the **interfaces** file and restart the network manager again.
 - Sometimes a reboot is necessary.
 
-#### Using the librealsense sdk:
+#### Accessing the A1 with LAN and the Hotspot
 
-- Type **realsense-viewer** into the terminal to access the realsense viewer program. Here you can view all the different possible camera streams from the d435i as well as 3d pointcloud stream.
-- You can also upgrade the camera firmware through this software, but it is currently set to the correct firmware for the librealsense SDK and ROS-Wrapper version installed on the A1.
-- The **Realsense SDK** also includes some examples which are already compiled in the **/home/unitree/librealsense/build/examples** folder
-- To run them, just type the name of the file in the terminal, for example **rs-capture** which launches a window with a colour, depth, gyro and accelerometer stream
-- Each example also has a [readme](https://github.com/TomBrown123/librealsense/tree/master/examples) file containing a code break down found in **/home/unitree/librealsense/examples**
-  
-#### Using the realsense ros-wrapper
-
-- The ros-wrapper is located in **/home/unitree/catkin_ws/src/realsense/realsense2_camera** and also contains many example roslaunch files.
-- Type **roslaunch realsense2_camera rs_capture** into the terminal to stream all camera sensors and publish on the appropriate ROS topics.
-- These streams can then be visualised through Rviz.
-- Refer to the realsense2_camera [readme](https://github.com/TomBrown123/realsense-ros/tree/ros1-legacy) for a detailed guide on the usage of the ROS Wrapper.
+- The Nvidea NX IP address is 192.168.123.12. This board handles SLAM, RobotVision 
+- The x86 Platform IP address is 192.168.123.161
+- The default password for both is **123**
+- The default password for the wifi hotspot is **000000000**
 
 #### Using the Unitree_legged_sdk
 
@@ -50,13 +42,6 @@
 - If you want to use this stream with opencv or something similar, then use **http://192.168.123.12:8080/?action=stream**.
 - With opencv for example, this would be: **cap = cv.VideoCapture('http://192.168.123.12:8080/?action=stream')**
 
-#### Using the Gesture Recognition demo
-
-- First, open the readme file and install all the required dependencies. The readme also contains a detailed explaination of how the program functions and how you can train the model to recognize new hand gestures
-- Next, connect to the A1 with your remote pc via ethernet or the A1 wifi hotspot.
-- Then open a terminal, navigate to the folder containing the app.py file and type **python3 app.py**
-- A window should now pop up with the video stream
-
 #### Using the Unitree qre package from [MYROBOTSHOP](https://www.docs.quadruped.de/projects/a1/html/quick_start.html#robot-setup)
 
 - This is a private repository which Niklas has access to.
@@ -67,7 +52,35 @@ The following will allow you to control the A1's movement with a keyboard.
 - **sudo su**
 - **source catkin_ws/devel/setup.bash**
 - **roslaunch a1_hardware_driver high_level_mode.launch** This launches an LCM server that communicates with 
-- **rosrun teleop_twist_keyboard teleop_twist_keyboard.py** Keyboard control
+- **rosrun teleop_twist_keyboard teleop_twist_keyboard.py** Keyboard control+
+
+#### Gait Planner
+
+- It is also possible to implement new gaits for the A1 using TOWR, CHAMP or Free Gait. MYBOTSHOP has published a short guide on this [here](https://www.mybotshop.de/QUADRUPED-Gait-Planning)
+- 
+
+#### Using the librealsense sdk:
+
+- This is the SDK for the D435i Camera.
+- Type **realsense-viewer** into the terminal to access the realsense viewer program. Here you can view all the different possible camera streams from the d435i as well as 3d pointcloud stream.
+- You can also upgrade the camera firmware through this software, but it is currently set to the correct firmware for the librealsense SDK and ROS-Wrapper version installed on the A1.
+- The **Realsense SDK** also includes some examples which are already compiled in the **/home/unitree/librealsense/build/examples** folder
+- To run them, just type the name of the file in the terminal, for example **rs-capture** which launches a window with a colour, depth, gyro and accelerometer stream
+- Each example also has a [readme](https://github.com/TomBrown123/librealsense/tree/master/examples) file containing a code break down found in **/home/unitree/librealsense/examples**
+  
+#### Using the realsense ros-wrapper
+
+- The ros-wrapper is located in **/home/unitree/catkin_ws/src/realsense/realsense2_camera** and also contains many example roslaunch files.
+- Type **roslaunch realsense2_camera rs_capture** into the terminal to stream all camera sensors and publish on the appropriate ROS topics.
+- These streams can then be visualised through Rviz.
+- Refer to the realsense2_camera [readme](https://github.com/TomBrown123/realsense-ros/tree/ros1-legacy) for a detailed guide on the usage of the ROS Wrapper.
+
+#### Using the Gesture Recognition demo
+
+- First, open the readme file and install all the required dependencies. The readme also contains a detailed explaination of how the program functions and how you can train the model to recognize new hand gestures
+- Next, connect to the A1 with your remote pc via ethernet or the A1 wifi hotspot.
+- Then open a terminal, navigate to the folder containing the app.py file and type **python3 app.py**
+- A window should now pop up with the video stream
 
 #### Using the rbd_packages
 
