@@ -38,7 +38,17 @@
 
 #### Using the RobotSLAMSystem
 
-- The RobotSLAMSystem process will be begin on startup if the lidar is connected to the Nvidea NX. 
+- The RobotSLAMSystem process will be begin on startup if the lidar is connected to the Nvidea NX, otherwise the RobotVisionSystem will start.
+- Both the RobotSLAMSystem and the RobotVisionSystem cannot be run at the same time. Attempting this will result in an **Bind client ip&port failed** error for whichever process starts secondly.
+- To start the RobotSLAMSystem, navigate to the RobotSLAMSystem folder in the terminal and type **./start.sh**. This currently starts all the relevant nodes and topics for slam and opens a rviz window.
+- You can set a goal using the 2d Nav Goal button or directly sending to a command to **/move_base_simple/goal**
+- However, unitl now I have been unable to get it to navigate although data is being published to the **/base_controller_node** from **/cmd_vel**. I suspect it is due to the powersupply being unable to supply enough power. Test this with the battery.
+
+#### Using the RobotVisionSystem
+
+- This uses the MJPG streamer to stream video through http to the unitree mobile app. You can access this stream through the web browser by typing **192.168.123.12:8080/**
+- If you want to use this stream with opencv or something similar, then use **http://192.168.123.12:8080/?action=stream**.
+- With opencv for example, this would be: **cap = cv.VideoCapture('http://192.168.123.12:8080/?action=stream')**
 
 #### Using the Gesture Recognition demo
 
