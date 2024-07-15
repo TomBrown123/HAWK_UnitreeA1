@@ -31,11 +31,13 @@
 
 #### Using the Unitree_legged_sdk
 
-- The Unitree_legged_sdk contains some examples for High and Low level movements
+- The Unitree_legged_sdk contains some examples for High and Low level movements.
+- For High level movements make sure the robot is standing and for Low level control the robot must be hung from a strap.
+- These examples communicate with the A1 over UDP and can be run with the relevant command, such as **sudo ./example_walk** 
 
 #### Using the RobotSLAMSystem
 
--
+- The RobotSLAMSystem process will be begin on startup if the lidar is connected to the Nvidea NX. 
 
 #### Using the Gesture Recognition demo
 
@@ -46,11 +48,11 @@
 
 #### Using the Unitree qre package from [MYROBOTSHOP](https://www.docs.quadruped.de/projects/a1/html/quick_start.html#robot-setup)
 
-- This is a private repository which Niklas has acess to.
+- This is a private repository which Niklas has access to.
 - The unitree_legged_sdk(utils) and the ros_to_real package(third_party) are already included in the package. Please refer to the readme for installing.
 - This package requires an Ouster and ZED2 camera for full functionality, such as SLAM. However, some of the launch files can still be used with the setup on our A1 and it is possible to get the odom data required for the package from another camera using something like [VINS_Fusion](https://github.com/HKUST-Aerial-Robotics/VINS-Fusion?tab=readme-ov-file) or the [realsense ROS-wrapper](https://github.com/TomBrown123/realsense-ros/tree/ros1-legacy).
 
-The following will allow you to control the A1 with a keyboard.
+The following will allow you to control the A1's movement with a keyboard.
 - **sudo su**
 - **source catkin_ws/devel/setup.bash**
 - **roslaunch a1_hardware_driver high_level_mode.launch** This launches an LCM server that communicates with 
