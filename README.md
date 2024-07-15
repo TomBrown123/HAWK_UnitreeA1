@@ -1,7 +1,11 @@
 <p align="center"><img src="img/HAWK_I.png" width="25%" /></p>
 <p align="center"> <font-size: 24px;"><strong>Unitree A1</strong></p>
+  
+[MYROBOTSHOP](https://www.docs.quadruped.de/projects/a1/html/quick_start.html#robot-setup)
 
+[rbd_packages](https://www.zhaw.ch/storage/engineering/institute-zentren/cai/studentische_arbeiten/Spring_2023/Spring23_BA_PfammatterSchweizer.pdf)
 
+[Gait Planning](https://www.mybotshop.de/QUADRUPED-Gait-Planning)
 
 #### Connecting to the internet
 
@@ -30,7 +34,7 @@
 
 #### Using the Unitree_legged_sdk
 
--
+- The Unitree_legged_sdk contains some examples for High and Low level movements
 
 #### Using the RobotSLAMSystem
 
@@ -38,11 +42,21 @@
 
 #### Using the Gesture Recognition demo
 
--
+- First, open the readme file and install all the required dependencies. The readme also contains a detailed explaination of how the program functions and how you can train the model to recognize new hand gestures
+- Next, connect to the A1 with your remote pc via ethernet or the A1 wifi hotspot.
+- Then open a terminal, navigate to the folder containing the app.py file and type **python3 app.py**
+- A window should now pop up with the video stream
 
-#### Using the Unitree_ros_to_real package
+#### Using the Unitree qre package from MYBOTSHOP
 
--
+- The unitree_legged_sdk(utils) and the ros_to_real package(third_party) are already included in the package. Please refer to the readme for installing.
+- This package requires an Ouster and ZED2 camera for full functionality. However, some of the launch files can still be used with the setup on our A1 and it is possible to get the odom data from another camera using something like [VINS_Fusion](https://github.com/HKUST-Aerial-Robotics/VINS-Fusion?tab=readme-ov-file) or the realsense ROS-wrapper.
+
+The following will allow you to control the A1 with a keyboard.
+- **sudo su**
+- **source catkin_ws/devel/setup.bash**
+- **roslaunch a1_hardware_driver high_level_mode.launch** This launches an LCM server that communicates with 
+- **rosrun teleop_twist_keyboard teleop_twist_keyboard.py** Keyboard control
 
 #### Using the rbd_packages
 
