@@ -33,7 +33,8 @@
 
 - The Unitree_legged_sdk contains some examples for High and Low level movements.
 - For High level movements make sure the robot is standing and for Low level control the robot must be hung from a strap.
-- These examples communicate with the A1 over UDP and can be run with the relevant command, such as **sudo ./example_walk** 
+- These examples communicate with the A1 over UDP and can be run with the relevant command, such as **sudo ./example_walk**
+- However, when I ran these examples, the A1 went through the movements briefly and then fell to the ground. I suspect it is either due to the acctuators not receiving enough power (I was using a powersupply to power the A1) or there is a certain amount of latency which leads to the movements becoming out of sync which causes the A1 to go into safe mode and instantly stop all processes.
 
 #### Using the RobotSLAMSystem
 
