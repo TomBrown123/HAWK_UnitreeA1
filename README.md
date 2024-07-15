@@ -1,4 +1,4 @@
-<p align="center"><img src="img/HAWK_I.png" width="25%" /></p>
+<p align="center"><img src="docs/imgs/HAWK_I.png" width="25%" /></p>
 <p align="center"> <font-size: 24px;"><strong>Unitree A1</strong></p>
   
 
