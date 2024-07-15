@@ -23,15 +23,15 @@
 
 ####  Unitree_legged_sdk
 
-- The Unitree_legged_sdk contains some examples for High and Low level movements.
-- For High level movements make sure the robot is standing and for Low level control the robot must be hung from a strap.
+- The Unitree_legged_sdk contains some examples for High and Low level control.
+- For High level control, make sure the robot is standing and for Low level control the robot must be hung from a strap.
 - These examples communicate with the A1 over UDP and can be run with the relevant command, such as `sudo ./example_walk`
 - However, when I ran these examples, the A1 went through the movements briefly and then fell to the ground. I suspect it is either due to the acctuators not receiving enough power (I was using a powersupply to power the A1) or there is a certain amount of latency which leads to the movements becoming out of sync which causes the A1 to go into safe mode and instantly stop all processes.
 
 #### RobotSLAMSystem
 
 - The RobotSLAMSystem process will be begin on startup if the lidar is connected to the Nvidea NX, otherwise the RobotVisionSystem will start.
-- Both the RobotSLAMSystem and the RobotVisionSystem cannot be run at the same time. Attempting this will result in an **Bind client ip&port failed** error for whichever process starts secondly.
+- Both the RobotSLAMSystem and the RobotVisionSystem cannot be run at the same time. Attempting this will result in an **Bind client ip&port failed** error for whichever process starts secondly. Thus, you must first `kill PID # replace PID with RobotVisionSyst PID` if RobotVisionSystem is running.
 - To start the RobotSLAMSystem, navigate to the RobotSLAMSystem folder in the terminal and type `./start.sh`. This currently starts all the relevant nodes and topics for slam and opens a rviz window.
 - You can set a goal using the 2d Nav Goal button or directly sending to a command to **/move_base_simple/goal**
 - However, unitl now I have been unable to get it to navigate although data is being published to the **/base_controller_node** from **/cmd_vel**. I suspect it is due to the powersupply being unable to supply enough power. Test this with the battery.
@@ -42,7 +42,7 @@
 - If you want to use this stream with opencv or something similar, then use `http://192.168.123.12:8080/?action=stream`.
 - With opencv for example, this would be: `cap = cv.VideoCapture('http://192.168.123.12:8080/?action=stream')`
 
-#### Using the Unitree qre_a1 package from [MYROBOTSHOP](https://www.docs.quadruped.de/projects/a1/html/quick_start.html#robot-setup)
+#### qre_a1 package from [MYROBOTSHOP](https://www.docs.quadruped.de/projects/a1/html/quick_start.html#robot-setup)
 
 - This is a private repository from MYBOTSHOP which Niklas has access to.
 - The **unitree_legged_sdk**(utils) and the **ros_to_real**(third_party) packages are already included in the qre repository. Please refer to the readme for installing.
@@ -68,7 +68,8 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py # Keyboard control
 #### librealsense SDK:
 
 - This is the SDK for the D435i Camera.
-- Type `realsense-viewer` into the terminal to access the realsense viewer program. Here you can view all the different possible camera streams from the d435i as well as 3d pointcloud stream.
+- If you want to use the SDK you must kill the `RobotVisionSyst` process first.
+- Type `realsense-viewer` into the terminal to access the realsense viewer program. Here you can view all the different possible camera streams from the d435i as well as a 3d pointcloud stream.
 - You can also upgrade the camera firmware through this software, but it is currently set to the correct firmware for the **librealsense** SDK and **ROS-Wrapper** version installed on the A1.
 - The **Realsense SDK** also includes some examples which are already compiled in the **/home/unitree/librealsense/build/examples** folder
 - To run them, just type the name of the file in the terminal, for example `rs-capture` which launches a window with a colour, depth, gyro and accelerometer stream
@@ -90,5 +91,5 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py # Keyboard control
 
 #### rbd_packages
 
-- This package was also built using an Ouster and ZED2, and as such needs to first be modified in order to work. Unfortunately there is a header file that they placed in their **qre_a1** package which is not included on their github and the **rbd_ros** package, which is supposed to run on the robot, cannot be built with catkin_make as long as it is missing.
-- However, along with the [Bachelor thesis](https://www.zhaw.ch/storage/engineering/institute-zentren/cai/studentische_arbeiten/Spring_2023/Spring23_BA_PfammatterSchweizer.pdf) it provides a good start for implementing gesture recognition based movements on the A1 if one decided to build it from scratch.
+- This package was also built using an Ouster and ZED2, and as such needs to first be modified in order to work. Unfortunately there is a header file that they placed in their **qre_a1** package which is not included on their github. The **rbd_ros** package, which is supposed to used on the robot, cannot be built with catkin_make as long as it is missing.
+- However, along with the [Bachelor thesis](https://www.zhaw.ch/storage/engineering/institute-zentren/cai/studentische_arbeiten/Spring_2023/Spring23_BA_PfammatterSchweizer.pdf) describing how it was designed, it provides a good start for implementing gesture recognition based movements on the A1 if one decided to build it from scratch.
