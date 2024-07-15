@@ -31,9 +31,9 @@
 #### RobotSLAMSystem
 
 - The `RobotSLAMSystem` will be begin on startup if the lidar is connected to the Nvidea NX, otherwise the RobotVisionSystem will start.
-- Both the RobotSLAMSystem and the RobotVisionSystem cannot be run at the same time. Attempting this will result in an **Bind client ip&port failed** error for whichever process starts secondly. Thus, you must first `kill PID # replace PID with RobotVisionSyst PID` if RobotVisionSystem is running.
-- To start the RobotSLAMSystem, navigate to the RobotSLAMSystem folder in the terminal and type `./start.sh`. This currently starts all the relevant nodes and topics for slam and opens a rviz window.
-- You can set a goal using the 2d Nav Goal button or directly sending to a command to **/move_base_simple/goal**
+- Both the RobotSLAMSystem and the RobotVisionSystem cannot be run at the same time. Attempting this will result in a **Bind client ip&port failed** error for whichever process starts second. Thus, you must first `kill PID # replace PID with RobotVisionSyst PID` if RobotVisionSystem is running.
+- To start the RobotSLAMSystem, navigate to the RobotSLAMSystem folder in the terminal and type `./start.sh`. This currently starts all the relevant nodes and topics for slam and opens a rviz window which visualises the costmap.
+- You can set a goal using the 2d Nav Goal button or by directly sending a command to **/move_base_simple/goal**
 - However, unitl now I have been unable to get it to navigate although data is being published to the **/base_controller_node** from **/cmd_vel**. I suspect it is due to the powersupply being unable to supply enough power. Test this with the battery.
 
 #### RobotVisionSystem
@@ -45,7 +45,7 @@
 #### qre_a1 package from [MYROBOTSHOP](https://www.docs.quadruped.de/projects/a1/html/quick_start.html#robot-setup)
 
 - This is a private repository from MYBOTSHOP which Niklas has access to.
-- The **unitree_legged_sdk**(utils) and the **ros_to_real**(third_party) packages are already included in the qre repository. Please refer to the readme for installing.
+- The **unitree_legged_sdk** (/utils) and the **ros_to_real** (/third_party) packages are already included in the qre repository. Please refer to the readme for installing.
 - This package requires an Ouster and ZED2 camera for full functionality, such as SLAM and autonomous navigation. However, some of the launch files can still be used with the setup on our A1 and it is possible to get the odom data required for the package from another camera using something like [VINS_Fusion](https://github.com/HKUST-Aerial-Robotics/VINS-Fusion?tab=readme-ov-file) or the [realsense ROS-wrapper](https://github.com/TomBrown123/realsense-ros/tree/ros1-legacy).
 
 The following will allow you to control the A1's movement with a keyboard.
@@ -56,6 +56,10 @@ source catkin_ws/devel/setup.bash
 roslaunch a1_hardware_driver high_level_mode.launch # This launches an LCM server that communicates with the x86 platform
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py # Keyboard control
 ```
+
+#### Gazeebo simulation
+
+-
 
 #### Gait Planner
 
@@ -68,19 +72,19 @@ rosrun teleop_twist_keyboard teleop_twist_keyboard.py # Keyboard control
 #### librealsense SDK:
 
 - This is the SDK for the D435i Camera.
-- If you want to use the SDK you must kill the `RobotVisionSyst` process first.
+- If you want to use the SDK you must first kill the `RobotVisionSyst` process.
 - Type `realsense-viewer` into the terminal to access the realsense viewer program. Here you can view all the different possible camera streams from the d435i as well as a 3d pointcloud stream.
 - You can also upgrade the camera firmware through this software, but it is currently set to the correct firmware for the **librealsense** SDK and **ROS-Wrapper** version installed on the A1.
 - The **Realsense SDK** also includes some examples which are already compiled in the **/home/unitree/librealsense/build/examples** folder
 - To run them, just type the name of the file in the terminal, for example `rs-capture` which launches a window with a colour, depth, gyro and accelerometer stream
-- Each example also has a [readme](https://github.com/TomBrown123/librealsense/tree/master/examples) file containing a code break down found in **/home/unitree/librealsense/examples**
+- Each example also has a [readme](https://github.com/TomBrown123/librealsense/tree/master/examples) file containing a code break down.
   
 #### Realsense ROS-wrapper
 
 - The ros-wrapper is located in **/home/unitree/catkin_ws/src/realsense/realsense2_camera** and also contains many example roslaunch files.
 - Type `roslaunch realsense2_camera rs_capture` into the terminal to stream all camera sensors and publish them on the appropriate ROS topics.
 - These streams can then be visualised through Rviz.
-- Refer to the realsense2_camera [readme](https://github.com/TomBrown123/realsense-ros/tree/ros1-legacy) for a detailed guide on the usage of the ROS Wrapper.
+- Refer to the **realsense2_camera** [readme](https://github.com/TomBrown123/realsense-ros/tree/ros1-legacy) for a detailed guide on its usage.
 
 #### The Gesture Recognition demo
 
