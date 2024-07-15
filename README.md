@@ -30,7 +30,7 @@
 
 #### RobotSLAMSystem
 
-- The RobotSLAMSystem process will be begin on startup if the lidar is connected to the Nvidea NX, otherwise the RobotVisionSystem will start.
+- The `RobotSLAMSystem` will be begin on startup if the lidar is connected to the Nvidea NX, otherwise the RobotVisionSystem will start.
 - Both the RobotSLAMSystem and the RobotVisionSystem cannot be run at the same time. Attempting this will result in an **Bind client ip&port failed** error for whichever process starts secondly. Thus, you must first `kill PID # replace PID with RobotVisionSyst PID` if RobotVisionSystem is running.
 - To start the RobotSLAMSystem, navigate to the RobotSLAMSystem folder in the terminal and type `./start.sh`. This currently starts all the relevant nodes and topics for slam and opens a rviz window.
 - You can set a goal using the 2d Nav Goal button or directly sending to a command to **/move_base_simple/goal**
