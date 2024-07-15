@@ -16,10 +16,10 @@
 
 #### Accessing the A1 with LAN and the Hotspot
 
-- The Nvidea NX IP address is 192.168.123.12. This board handles SLAM, RobotVision 
-- The x86 Platform IP address is 192.168.123.161
+- The Nvidea NX IP address is 192.168.123.12. This board handles SLAM, Image Transmission and Stereo Vision 
+- The x86 Platform IP address is 192.168.123.161. This board handles User Logic control, Sport mode controller and the unitree_sdk. When you start an LCM server using the examples, it connects to this board and and sends the movement commands over UDP.
 - The default password for both is **123**
-- The default password for the wifi hotspot is **000000000**
+- The default password for the wifi hotspot is **00000000**
 
 #### Using the Unitree_legged_sdk
 
@@ -77,10 +77,10 @@ The following will allow you to control the A1's movement with a keyboard.
 
 #### Using the Gesture Recognition demo
 
-- First, open the readme file and install all the required dependencies. The readme also contains a detailed explaination of how the program functions and how you can train the model to recognize new hand gestures
+- First, open the readme file and install all the required dependencies. The [readme](https://github.com/TomBrown123/hand-gesture-recognition-mediapipe) also contains a detailed explaination of how the program functions and how you can train the model to recognize new hand gestures
 - Next, connect to the A1 with your remote pc via ethernet or the A1 wifi hotspot.
 - Then open a terminal, navigate to the folder containing the app.py file and type **python3 app.py**
-- A window should now pop up with the video stream
+- A window should now pop up with the video stream which recognizes some hand gestures.
 
 #### Using the rbd_packages
 
