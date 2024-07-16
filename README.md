@@ -2,11 +2,16 @@
 <p align="center"> <font-size: 32px;"><strong>Unitree A1</strong></p>
   
 
+#### Accessing the A1 via LAN or the Wifi Hotspot
 
+- The Nvidea NX IP address is `192.168.123.12`. This board handles SLAM, Image Transmission and Stereo Vision and is also where you will implement most of your code.
+- The UP-CHT01 IP address is `192.168.123.161`. This board handles User Logic control, Sport mode controller and the unitree_sdk. When you start an LCM server using the Unitree SDK examples, it connects to this board and and sends the movement commands over UDP.
+- The default password for both is **123**
+- The default password for the wifi hotspot is **00000000**
 
 #### Connecting to the internet
 
-- Connect the A1 via ethernet to the internet
+- Connect the A1 via ethernet to a router
 - Open a terminal on A1 and type `sudo gedit /etc/network/interfaces` and comment everything out.
 - Save the file and in the terminal type `sudo systemctl restart NetworkManager.service`
 - On the top right of the desktop change the network to **Wired connection**
@@ -14,24 +19,17 @@
 - In order to restore the connection between all the components again, undo the changes to the **interfaces** file and restart the network manager again.
 - Sometimes a reboot is necessary.
 
-#### Accessing the A1 with LAN and the Hotspot
-
-- The Nvidea TX2 IP address is `192.168.123.12`. This board handles SLAM, Image Transmission and Stereo Vision and is also where you will implement most of your code.
-- The x86 Platform IP address is `192.168.123.161`. This board handles User Logic control, Sport mode controller and the unitree_sdk. When you start an LCM server using the Unitree SDK examples, it connects to this board and and sends the movement commands over UDP.
-- The default password for both is **123**
-- The default password for the wifi hotspot is **00000000**
-
 ####  Unitree_legged_sdk
 
 - The Unitree_legged_sdk contains some examples for High and Low level control.
 - For High level control, make sure the robot is standing and for Low level control the robot must be hung from a strap.
 - These examples communicate with the A1 over UDP and can be run with the relevant command, such as `sudo ./example_walk`
-- However, when I ran these examples, the A1 went through the movements briefly and then fell to the ground. I suspect it is either due to the acctuators not receiving enough power (I was using a powersupply to power the A1) or there is a certain amount of latency which leads to the movements becoming out of sync which causes the A1 to go into safe mode and instantly stop all processes.
+- However, when I ran these examples, the A1 went through the movements briefly and then fell to the ground. I suspect it is either due to the acctuators not receiving enough power (I was using a power supply to power the A1) or there is a certain amount of latency which leads to the movements becoming out of sync which causes the A1 to go into safe mode and instantly stop all processes.
 
 #### RobotSLAMSystem
 
 - The `RobotSLAMSystem` will be begin on startup if the lidar is connected to the Nvidea NX, otherwise the RobotVisionSystem will start.
-- Both the RobotSLAMSystem and the RobotVisionSystem cannot be run at the same time. Attempting this will result in a **Bind client ip&port failed** error for whichever process starts second. Thus, you must first `kill PID # replace PID with RobotVisionSyst PID` if RobotVisionSystem is running.
+- Both the RobotSLAMSystem and the RobotVisionSystem cannot be run at the same time. Attempting this will result in a `bind client ip&port failed` error for whichever process starts second. Thus, you must first `kill PID # replace PID with RobotVisionSyst PID` if RobotVisionSystem is running.
 - To start the RobotSLAMSystem, navigate to the RobotSLAMSystem folder in the terminal and type `./start.sh`. This currently starts all the relevant nodes and topics for slam and opens a rviz window which visualises the costmap.
 - You can set a goal using the 2d Nav Goal button or by directly sending a command to **/move_base_simple/goal**
 - However, unitl now I have been unable to get it to navigate although data is being published to the **/base_controller_node** from **/cmd_vel**. I suspect it is due to the powersupply being unable to supply enough power. Test this with the battery.
@@ -53,18 +51,19 @@ The following will allow you to control the A1's movement with a keyboard.
 ```bash
 sudo su
 source catkin_ws/devel/setup.bash
-roslaunch a1_hardware_driver high_level_mode.launch # This launches an LCM server that communicates with the x86 platform
+roslaunch a1_hardware_driver high_level_mode.launch # This launches an LCM server that communicates with the UP-CHT01
 rosrun teleop_twist_keyboard teleop_twist_keyboard.py # Keyboard control
 ```
 
 #### Gazeebo simulation
 
--
+- Usage of the qre_a1 and Unitree Gazeebo simulation is detailed [here](https://www.docs.quadruped.de/projects/a1/html/simulation.html). However, these are incapable of High Level control, such as walking.
+- For simulation of the A1 I would recommend using [CHAMP](https://github.com/chvmp/champ). You can find the config files for the A1 [here](https://github.com/chvmp/robots/tree/master/configs/a1_config)
 
 #### Gait Planner
 
 - It is also possible to implement new gaits for the A1 using CHAMP, TOWR or Free Gait. MYBOTSHOP has published a short guide on this [here](https://www.mybotshop.de/QUADRUPED-Gait-Planning)
-##### Here are the links to the different packages:
+##### Here are the links to the different packages for gait planning:
 - [CHAMP Setup Assistant](https://github.com/chvmp/champ_setup_assistant)
 - [TOWR](https://wiki.ros.org/towr)
 - [Free Gait](https://github.com/leggedrobotics/free_gait)
